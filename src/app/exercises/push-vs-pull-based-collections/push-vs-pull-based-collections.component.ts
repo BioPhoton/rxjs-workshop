@@ -4,7 +4,7 @@ import {
   OnInit,
   ViewEncapsulation
 } from '@angular/core';
-import {from} from 'rxjs/index';
+import {from, Observable} from 'rxjs/index';
 
 @Component({
   selector: 'rxws-push-vs-pull-based-collections',
@@ -44,14 +44,14 @@ export class PushVsPullBasedCollectionsComponent {
       .pipe(
 
       )
-      .subscribe({
-        next(v) {
+      .subscribe(
+        (v: number) => {
           console.log('next: ', v);
         },
-        complete(v) {
+        (v) => {
           console.log('complete');
         }
-      });
+      );
 
     // replace observable reduce with scan
 

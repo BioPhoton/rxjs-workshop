@@ -1,6 +1,9 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ViewEncapsulation
+} from '@angular/core';
 import {interval} from 'rxjs/index';
-import {multicast, publish} from 'rxjs/internal/operators';
 
 @Component({
   selector: 'rxws-single-multi-cast',
@@ -13,7 +16,7 @@ import {multicast, publish} from 'rxjs/internal/operators';
   encapsulation: ViewEncapsulation.Native,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SingleMultiCastComponent implements OnInit {
+export class SingleMultiCastComponent {
 
   constructor() {
     this.singleVsMulticast();
@@ -23,9 +26,8 @@ export class SingleMultiCastComponent implements OnInit {
   singleVsMulticast() {
     const interval1$ = interval(1000);
 
-    interval1$.pipe(multicast());
-    interval1$.subscribe(console.log);
-    // interval1$.connect();
+    // subscribe here
+
     setTimeout(() => {
       // subscribe here
     }, 3000);
@@ -34,19 +36,9 @@ export class SingleMultiCastComponent implements OnInit {
   multicastWithShare() {
 
   }
+
   multicastWithPublishConnect() {
 
-  }
-
-  multicastWithSubject() {
-
-  }
-
-  multicastWithMulticase() {
-
-  }
-
-  ngOnInit() {
   }
 
 }

@@ -26,48 +26,14 @@ You'll learn:
 - Error handling and error encapsulation
 - Pipes, evergreen and exotic
 - Custom configurable pipes
-
-Lift ? 
-
-```typescript
-
-// pipeSignature 
-(source: Observable<any>): Observable<any>
-
-const myCustomPipe = (fn) => (source) => new Observable((observer) => {
-  return source.subscribe({
-    next(v) => {observer.next(fn(v))},
-    error(e) => {observer.error(e)},
-    conplete() => {observer.complete()},
-  })
-});
-
-// Using pipe
-const myCustomPipe = pipe(
-  map(v => v*2),
-  map(v => v*3)
-);
-
-```
-
 - Multicasting with observables,  
   <div *ngIf="randomBoolean">{{$o | async}}</div>
 
-- Subjects
- **Subscription**
-  Part 2-4 36:10
-
- .complete() vs .unsubscribe()
-
-**Subject == Observer**
-
-
-
+- Subjects and Subscriptions
 - The different subjects 
 - Higher order Observables
 
 As the last exercise, we will solve a couple of real-life problems in a complete example from start to end.
-
 
 - Resources
   - RxJS imports: 

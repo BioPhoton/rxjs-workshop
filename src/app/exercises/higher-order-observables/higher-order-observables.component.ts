@@ -5,8 +5,9 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Observable} from 'rxjs/index';
+import {interval, merge, Observable} from 'rxjs/index';
 import {debounceTime, switchMap, delay, distinctUntilChanged} from 'rxjs/operators';
+import {mapTo} from 'rxjs/internal/operators';
 
 interface Flight {
   id: string;
@@ -64,9 +65,14 @@ export class HigherOrderObservablesComponent {
   }
 
   search(searchString: string): Observable<Flight[]> {
-    const msDelay = 2000; // (Math.random(2000) * 1000) + 500;
+    const msDelay = 0; // (Math.random(2000) * 1000) + 500;
     return this.http.get<Flight[]>('http://angular.at/api/flight', {params: {from: searchString}}).pipe(delay(msDelay));
   }
 
+  operatorOrder() {
+    const oO1$ = merge(interval(1000), interval(1500).pipe(mapTo(2)));
+
+    oO1$.subscribe(console.log);
+  }
 
 }
