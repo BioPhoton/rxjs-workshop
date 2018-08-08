@@ -26,9 +26,7 @@ You'll learn:
 - Error handling and error encapsulation
 - Pipes, evergreen and exotic
 - Custom configurable pipes
-- Multicasting with observables,  
-  <div *ngIf="randomBoolean">{{$o | async}}</div>
-
+- Multicasting with observables
 - Subjects and Subscriptions
 - The different subjects 
 - Higher order Observables

@@ -13,7 +13,7 @@ import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy } from '@
   encapsulation: ViewEncapsulation.Native,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MemoryLakeComponent implements OnInit {
+export class MemoryLeakComponent implements OnInit {
 
   constructor() { }
 

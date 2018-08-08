@@ -1,26 +1,34 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CustomOperatorsComponent } from './custom-operators/custom-operators.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
-import {HigherOrderObservablesComponent} from './higher-order-observables/higher-order-observables.component';
+import {NgModule} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
+import {CustomOperatorsComponent} from './custom-operators/custom-operators.component';
+import {HigherOrderOperatorsComponent} from './higher-order-observables/higher-order-observables.component';
 import {PushBasedServiceModule} from './push-based-service/push-based-service.module';
-import {MemoryLakeModule} from './memory-lake/memory-lake.module';
-import {RouterModule} from '@angular/router';
-import { SingleMultiCastComponent } from './single-multi-cast/single-multi-cast.component';
+import {SingleMultiCastComponent} from './single-multi-cast/single-multi-cast.component';
+import {MemoryLeakModule} from './memory-leak/memory-leak.module';
+import {PushVsPullBasedCollectionsComponent} from './push-vs-pull-based-collections/push-vs-pull-based-collections.component';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    PushBasedServiceModule,
-    MemoryLakeModule
   ],
-  declarations: [CustomOperatorsComponent, HigherOrderObservablesComponent, SingleMultiCastComponent],
+  declarations: [
+    CustomOperatorsComponent,
+    HigherOrderOperatorsComponent,
+    SingleMultiCastComponent,
+    PushVsPullBasedCollectionsComponent
+  ],
   exports: [
+    CustomOperatorsComponent,
     PushBasedServiceModule,
-    MemoryLakeModule,
-    CustomOperatorsComponent, HigherOrderObservablesComponent, SingleMultiCastComponent]
+    MemoryLeakModule,
+    HigherOrderOperatorsComponent,
+    PushVsPullBasedCollectionsComponent,
+    SingleMultiCastComponent
+  ]
 })
-export class ExercisesModule { }
+export class ExercisesModule {
+}

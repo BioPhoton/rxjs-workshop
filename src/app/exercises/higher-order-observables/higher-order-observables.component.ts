@@ -5,9 +5,19 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {interval, merge, Observable} from 'rxjs/index';
-import {debounceTime, switchMap, delay, distinctUntilChanged} from 'rxjs/operators';
-import {mapTo} from 'rxjs/internal/operators';
+import {interval, Observable, of} from 'rxjs/index';
+import {
+  map,
+  merge as mergeWith,
+  mergeAll,
+  mergeMap
+} from 'rxjs/internal/operators';
+import {
+  debounceTime,
+  delay,
+  distinctUntilChanged,
+  switchMap
+} from 'rxjs/operators';
 
 interface Flight {
   id: string;
@@ -17,9 +27,9 @@ interface Flight {
 }
 
 @Component({
-  selector: 'rxws-higher-order-obseravbles',
+  selector: 'rxws-higher-order-operators',
   template: `
-    <h1>higher-order-obseravbles</h1>
+    <h1>higher-order-operators</h1>
     <form [formGroup]="form">
       <input formControlName="search"/>
     </form>
@@ -33,7 +43,7 @@ interface Flight {
   encapsulation: ViewEncapsulation.Native,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HigherOrderObservablesComponent {
+export class HigherOrderOperatorsComponent {
 
   form: FormGroup;
   flights$: Observable<any>;
@@ -42,6 +52,8 @@ export class HigherOrderObservablesComponent {
     private http: HttpClient,
     private fb: FormBuilder
   ) {
+    // Use the operatorOrder() function for the first exercise
+
     this.form = this.fb.group({search: []});
     this.flights$ = this.form
       .get('search')
@@ -62,6 +74,7 @@ export class HigherOrderObservablesComponent {
       .subscribe(
         (value) => console.log('search result updated: ', value)
       );
+
   }
 
   search(searchString: string): Observable<Flight[]> {
@@ -70,9 +83,23 @@ export class HigherOrderObservablesComponent {
   }
 
   operatorOrder() {
-    const oO1$ = merge(interval(1000), interval(1500).pipe(mapTo(2)));
+    const getO1$ = (i?: any, t?: number) => interval(t ? t : 1000).pipe(map(v => i ? i : v));
+    const o2$ = interval(3000).pipe(map(v => getO1$('tick')));
 
-    oO1$.subscribe(console.log);
+    const mergeRes$ = getO1$(42).pipe(
+      // merge operatore here
+    );
+    mergeRes$.subscribe(console.log);
+
+    const mergeMapRes$ = o2$.pipe(
+      // mergeMap operator here
+    );
+    mergeMapRes$.subscribe(console.log);
+
+    const mergeAllRes$ = of(getO1$('a', 100), getO1$('b'), getO1$('c', 300)).pipe(
+      // mergeAll operator here
+    );
+    mergeAllRes$.subscribe(console.log);
   }
 
 }
